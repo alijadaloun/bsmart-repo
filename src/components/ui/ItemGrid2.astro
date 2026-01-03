@@ -20,7 +20,7 @@ const {
   items && items.length > 0 && (
     <div
       class={twMerge(
-        `grid gap-8 gap-x-12 sm:gap-y-8 ${
+        `grid gap-6 sm:gap-8 gap-x-8 sm:gap-x-12 sm:gap-y-8 ${
           columns === 4
             ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
             : columns === 3
@@ -32,7 +32,7 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
+      {      items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
         <div
           class={twMerge(
             'relative flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
@@ -41,15 +41,15 @@ const {
           )}
         >
           {(icon || defaultIcon) && (
-            <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
+            <Icon name={icon || defaultIcon} class={twMerge('mb-3 sm:mb-4 w-8 h-8 sm:w-10 sm:h-10', defaultIconClass, itemClasses?.icon)} />
           )}
-          <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
+          <div class={twMerge('text-lg sm:text-xl font-bold text-gray-900 dark:text-white', titleClass, itemClasses?.title)}>{title}</div>
           {description && (
-            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
+            <p class={twMerge('text-sm sm:text-base text-muted dark:text-gray-300 mt-2 sm:mt-3', descriptionClass, itemClasses?.description)} set:html={description} />
           )}
           {callToAction && (
-            <div class="mt-2">
-              <Button {...callToAction} />
+            <div class="mt-3 sm:mt-4">
+              <Button {...callToAction} class="text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3" />
             </div>
           )}
         </div>

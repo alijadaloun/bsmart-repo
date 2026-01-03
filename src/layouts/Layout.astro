@@ -44,5 +44,51 @@ const { language, textDirection } = I18N;
     <slot />
 
     <BasicScripts />
+    <script is:inline>
+      // Initialize widget overlays to fade in on scroll
+      (function() {
+        function initWidgetOverlays() {
+          const overlays = document.querySelectorAll('.widget-overlay:not([data-initialized])');
+          
+          overlays.forEach((overlay) => {
+            overlay.setAttribute('data-initialized', 'true');
+            const widgetSection = overlay.closest('.widget-section');
+            
+            if (!widgetSection) return;
+            
+            const observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    overlay.style.opacity = '1';
+                  } else {
+                    overlay.style.opacity = '0';
+                  }
+                });
+              },
+              {
+                threshold: 0.1,
+                rootMargin: '0px'
+              }
+            );
+            
+            observer.observe(widgetSection);
+          });
+        }
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initWidgetOverlays);
+        } else {
+          initWidgetOverlays();
+        }
+        
+        // Also handle dynamically added content
+        const observer = new MutationObserver(initWidgetOverlays);
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      })();
+    </script>
   </body>
 </html>

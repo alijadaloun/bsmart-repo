@@ -15,74 +15,49 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
+    tagline="Our Services"
+    title="Comprehensive Tutoring Solutions for Every Student"
+    subtitle="From core academic subjects to specialized exam preparation, B-Smart offers personalized tutoring services designed to help students achieve their full potential."
+    actions={[
+      { variant: 'primary', text: 'Call Us', href: 'tel:+96181501832', icon: 'tabler:phone' },
+      { variant: 'outline', text: 'Contact Us', href: '/contact' },
+    ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
+      src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      alt: 'B-Smart Tutoring Services',
     }}
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
+    title="Our Tutoring Services"
+    subtitle="Explore our range of educational services designed to support students at every stage of their academic journey."
+    columns={2}
     items={[
       {
-        title: 'Educational',
+        title: 'School Tutoring',
         description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
+          'Expert one-on-one and small group tutoring in core subjects including Math, Physics, and Chemistry. Our tutors work closely with students to identify learning gaps, build strong foundations, and improve overall academic performance. Suitable for students from elementary to high school levels.',
         icon: 'tabler:school',
       },
       {
-        title: 'Interior Design',
+        title: 'Exam Preparation',
         description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
+          'Comprehensive preparation programs for standardized tests including SAT and official school exams. We provide targeted strategies, extensive practice materials, mock exams, and confidence-building sessions. Our proven approach helps students maximize their scores and reduce test anxiety.',
+        icon: 'tabler:certificate',
       },
       {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
+        title: 'Coding & Technology',
         description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
+          'Learn programming fundamentals with Python and other essential technologies. Perfect for students interested in computer science, software development, or technology careers. Our courses cover basics to intermediate levels, with hands-on projects and real-world applications.',
+        icon: 'tabler:code',
       },
       {
-        title: 'Blog',
+        title: 'Languages',
         description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
+          'English language support for students at all proficiency levels. Improve reading comprehension, writing skills, grammar, vocabulary, and conversational English. Our language tutors use engaging methods to make learning enjoyable and effective.',
+        icon: 'tabler:language',
       },
     ]}
   />
@@ -93,37 +68,38 @@ const metadata = {
     isReversed
     items={[
       {
-        title: 'High-Quality Designs',
+        title: 'Personalized Learning Plans',
         description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
+          'Every student receives a customized learning plan based on their current level, learning style, and academic goals. We assess strengths and weaknesses to create a targeted approach.',
+        icon: 'tabler:target',
       },
       {
-        title: 'Customization Tools',
+        title: 'Experienced & Qualified Tutors',
         description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
+          'Our tutors are experienced educators with deep subject knowledge and a passion for teaching. They understand how to make complex topics accessible and engaging.',
+        icon: 'tabler:user-star',
       },
       {
-        title: 'Pre-Designed Elements',
+        title: 'Flexible Scheduling',
         description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
+          'We offer flexible scheduling options including weekday evenings and weekends. Choose between one-on-one sessions for focused attention or small groups for collaborative learning.',
+        icon: 'tabler:calendar',
       },
       {
-        title: 'Preview and Mockup Views',
+        title: 'Progress Tracking',
         description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
+          'Regular assessments and progress reports help students and parents track improvement. We celebrate milestones and adjust strategies as needed to ensure continued growth.',
+        icon: 'tabler:chart-line',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
+      src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      alt: 'B-Smart Learning Approach',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Our Teaching Approach</h3>
+      We believe in creating a supportive learning environment where students feel confident to ask questions and make mistakes.
     </Fragment>
   </Content>
 
@@ -133,79 +109,75 @@ const metadata = {
     isAfterContent
     items={[
       {
-        title: 'Time Savings',
+        title: 'Build Confidence',
         description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
+          'Our supportive environment helps students build confidence in their abilities. We focus on progress, not perfection, encouraging a growth mindset.',
+        icon: 'tabler:heart-handshake',
       },
       {
-        title: 'Professional Appearance',
+        title: 'Improve Grades',
         description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
+          'With targeted instruction and regular practice, students see measurable improvements in their grades and overall academic performance.',
+        icon: 'tabler:trending-up',
       },
       {
-        title: 'Cost-Efficiency',
+        title: 'Develop Study Skills',
         description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
+          'Beyond subject knowledge, we teach effective study techniques, time management, and problem-solving strategies that benefit students long-term.',
+        icon: 'tabler:book',
       },
       {
-        title: 'Instant Download',
+        title: 'Prepare for Success',
         description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
+          'Whether preparing for exams or building foundational skills, our programs equip students with the knowledge and confidence they need to succeed.',
+        icon: 'tabler:rocket',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: 'Student Success',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits of B-Smart Tutoring</h3>
+      Our comprehensive approach helps students achieve their academic goals while building skills that last a lifetime.
     </Fragment>
   </Content>
 
   <!-- Testimonials Widget *********** -->
 
   <Testimonials
-    title="Words from real customers"
+    title="Success Stories"
+    subtitle="Hear from students and parents who have experienced the B-Smart difference."
     testimonials={[
       {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
+        testimonial: `My daughter's Math grades improved from C to A- in just one semester. The tutors at B-Smart really understand how to explain concepts in a way that clicks.`,
+        name: 'Rania T.',
+        job: 'Parent',
         image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
+          src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
+          alt: 'Rania T. Image',
         },
       },
       {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
+        testimonial: `The Python programming course was amazing! I learned so much and now I'm confident about pursuing computer science in university.`,
+        name: 'Omar S.',
+        job: 'High School Student',
         image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
+          src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Omar S. Image',
         },
       },
       {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
+        testimonial: `B-Smart helped my son prepare for his official exams. The structured approach and practice tests made all the difference. Highly recommend!`,
+        name: 'Khalil M.',
+        job: 'Parent',
         image: {
           src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
+          alt: 'Khalil M. Image',
         },
       },
     ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
   />
 
   <!-- CallToAction Widget *********** -->
@@ -214,11 +186,19 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
+        text: 'Call Us',
+        href: 'tel:+96181501832',
+        icon: 'tabler:phone',
+      },
+      {
+        variant: 'outline',
+        text: 'Contact via WhatsApp',
+        href: 'https://wa.me/96181501832',
+        target: '_blank',
+        icon: 'tabler:brand-whatsapp',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
+    title="Ready to Get Started?"
+    subtitle="Call us at +961 81 501 832 to discuss your child's learning needs and discover how B-Smart can help them succeed."
   />
 </Layout>

@@ -2,18 +2,15 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'B-Smart Learning Center',
   ignoreTitleTemplate: true,
 };
 ---
@@ -25,340 +22,660 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
+        text: 'Call Us',
+        href: 'tel:+96181501832',
+        icon: 'tabler:phone',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: 'View Our Services', href: '/services' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
+    <Fragment slot="bg">
+      <div class="hero-background-container">
+        <div class="hero-background-image"></div>
+        <div class="hero-background-overlay"></div>
+      </div>
+    </Fragment>
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
+      Personalized Tutoring That <span class="text-accent dark:text-white">Delivers Real Results</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+      Expert tutors. Proven methods. Support for every student.
+      <br />
+      <span class="font-semibold">Smarter Learning. Better Results.</span>
     </Fragment>
   </Hero>
 
-  <!-- Note Widget ******************* -->
+  <style>
+    /* Always transparent navbar on homepage - even when scrolled */
+    #header,
+    #header.scroll {
+      background: transparent !important;
+      border-bottom: 1px solid transparent !important;
+    }
+    /* Override scroll state background from tailwind.css */
+    #header.scroll > div:first-child {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+    }
+    .dark #header.scroll > div:first-child {
+      background: transparent !important;
+      border-bottom: 1px solid transparent !important;
+      box-shadow: none !important;
+    }
+    #header a, #header button {
+      color: rgba(255, 255, 255, 0.95) !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    #header img, #header span {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    }
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
 
-  <!-- Features Widget *************** -->
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+    .hero-background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+      will-change: transform;
+    }
 
-  <!-- Content Widget **************** -->
+    .hero-background-image {
+      position: absolute;
+      top: -30%;
+      left: -30%;
+      width: 140%;
+      height: 140%;
+      background-image: url('/wave_light_mode.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transform-origin: center center;
+      filter: brightness(1) contrast(1.05) saturate(1.1);
+      transition: filter 0.5s ease-in-out, background-image 0.5s ease-in-out;
+      /* Faster, more dynamic animations */
+      animation: bgFloat 12s ease-in-out infinite, bgWave 15s ease-in-out infinite;
+      /* Use will-change only when animations are active */
+      will-change: transform, background-position;
+    }
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+    /* Horizontal drift animation - faster and more dynamic */
+    @keyframes bgFloat {
+      0%, 100% {
+        background-position: 50% 50%;
+      }
+      25% {
+        background-position: 46% 54%;
+      }
+      50% {
+        background-position: 54% 46%;
+      }
+      75% {
+        background-position: 46% 54%;
+      }
+    }
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    /* Dynamic vertical wave motion with scale (breathing effect) */
+    @keyframes bgWave {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      25% {
+        transform: translateY(-1%) scale(1.02);
+      }
+      50% {
+        transform: translateY(-2%) scale(1.04);
+      }
+      75% {
+        transform: translateY(-1%) scale(1.02);
+      }
+    }
 
-  <!-- Content Widget **************** -->
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+    /* Dark mode uses different image */
+    html.dark .hero-background-image,
+    .dark .hero-background-image {
+      background-image: url('/wave.jpg') !important;
+      background-position: center 30%;
+      filter: brightness(0.7) contrast(1.1) saturate(1.2);
+      animation: bgFloatDark 12s ease-in-out infinite, bgWaveDark 15s ease-in-out infinite;
+    }
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    @keyframes bgFloatDark {
+      0%, 100% {
+        background-position: 50% 30%;
+      }
+      25% {
+        background-position: 46% 34%;
+      }
+      50% {
+        background-position: 54% 26%;
+      }
+      75% {
+        background-position: 46% 34%;
+      }
+    }
 
-  <!-- Content Widget **************** -->
+    @keyframes bgWaveDark {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      25% {
+        transform: translateY(-1%) scale(1.02);
+      }
+      50% {
+        transform: translateY(-2%) scale(1.04);
+      }
+      75% {
+        transform: translateY(-1%) scale(1.02);
+      }
+    }
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+    /* Subtle gradient overlay for text readability */
+    .hero-background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      /* Soft gradient with subtle vignette */
+      background: 
+        radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%),
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.08) 0%,
+          rgba(0, 0, 0, 0.15) 30%,
+          rgba(0, 0, 0, 0.35) 70%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+      z-index: 1;
+      pointer-events: none;
+      transition: background 0.5s ease-in-out;
+    }
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    /* Dark mode overlay - no white gradients */
+    .dark .hero-background-overlay {
+      background: none !important;
+    }
 
-  <!-- Steps Widget ****************** -->
 
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+    /* Add subtle animated gradient overlay for visual interest */
+    .hero-background-overlay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+      opacity: 0.6;
+      animation: pulse 8s ease-in-out infinite;
+    }
 
-  <!-- Features2 Widget ************** -->
+    .dark .hero-background-overlay::before {
+      display: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+    }
+
+    /* Ensure hero section has proper height and positioning */
+    section[class*="relative"] {
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Add smooth theme transition */
+    .hero-background-image,
+    .hero-background-overlay {
+      transition: filter 0.5s ease-in-out, background 0.5s ease-in-out;
+    }
+
+    /* Accessibility: Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-background-image {
+        background-attachment: scroll;
+        transform: none !important;
+        filter: brightness(1) contrast(1) saturate(1);
+        animation: none !important;
+        will-change: auto;
+      }
+      .hero-background-container {
+        position: absolute;
+      }
+      .hero-background-overlay::before {
+        animation: none;
+      }
+      html.dark .hero-background-image,
+      .dark .hero-background-image {
+        background-image: url('/wave.jpg') !important;
+        filter: brightness(0.8) contrast(1) saturate(1);
+        animation: none !important;
+      }
+    }
+
+    /* Mobile optimization: enhanced for attractive, smooth design */
+    @media (max-width: 1023px) {
+      .hero-background-image {
+        top: -15%;
+        left: -15%;
+        width: 130%;
+        height: 130%;
+        background-attachment: scroll;
+        background-position: center 40%;
+        /* Smooth, attractive animations optimized for mobile */
+        animation: bgFloatMobile 20s ease-in-out infinite, bgWaveMobile 25s ease-in-out infinite;
+        animation-duration: 20s, 25s;
+        filter: brightness(1.05) contrast(1.1) saturate(1.15);
+        will-change: transform, background-position;
+      }
+      
+      /* Mobile-specific smooth animations */
+      @keyframes bgFloatMobile {
+        0%, 100% {
+          background-position: 50% 40%;
+        }
+        33% {
+          background-position: 48% 42%;
+        }
+        66% {
+          background-position: 52% 38%;
+        }
+      }
+
+      @keyframes bgWaveMobile {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-1.5%) scale(1.03);
+        }
+      }
+      
+      .hero-background-container {
+        position: absolute;
+        height: 100%;
+      }
+      
+      /* Enhanced mobile overlay for smooth transition to content below */
+      .hero-background-overlay {
+        background: 
+          radial-gradient(ellipse at center 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 20%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0.7) 75%,
+            rgba(255, 255, 255, 0.95) 95%,
+            rgba(255, 255, 255, 1) 100%
+          );
+      }
+      
+      .dark .hero-background-overlay {
+        background: none !important;
+      }
+      
+      .dark .hero-background-overlay::before {
+        display: none;
+      }
+      
+      /* Disable pulse animation on mobile for better performance */
+      .hero-background-overlay::before {
+        display: none;
+      }
+      
+      /* Dark mode mobile optimization */
+      html.dark .hero-background-image,
+      .dark .hero-background-image {
+        background-position: center 35%;
+        filter: brightness(0.75) contrast(1.15) saturate(1.25);
+        animation: bgFloatDarkMobile 20s ease-in-out infinite, bgWaveDarkMobile 25s ease-in-out infinite;
+      }
+      
+      @keyframes bgFloatDarkMobile {
+        0%, 100% {
+          background-position: 50% 35%;
+        }
+        33% {
+          background-position: 48% 37%;
+        }
+        66% {
+          background-position: 52% 33%;
+        }
+      }
+
+      @keyframes bgWaveDarkMobile {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-1.5%) scale(1.03);
+        }
+      }
+    }
+
+    /* Ultra-wide display support */
+    @media (min-width: 1920px) {
+      .hero-background-image {
+        width: 150%;
+        height: 150%;
+        top: -25%;
+        left: -25%;
+      }
+    }
+
+    /* Smooth scrolling for the entire page */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Enhance text readability in both modes */
+    section[class*="relative"] h1,
+    section[class*="relative"] p {
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark section[class*="relative"] h1,
+    .dark section[class*="relative"] p {
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Mobile text shadow adjustments for better readability */
+    @media (max-width: 768px) {
+      section[class*="relative"] h1,
+      section[class*="relative"] p {
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .dark section[class*="relative"] h1,
+      .dark section[class*="relative"] p {
+        text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (function() {
+      'use strict';
+      
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      let heroBg = null;
+      let heroContainer = null;
+      let heroSection = null;
+      let isMobile = window.innerWidth <= 768;
+      let ticking = false;
+      let lastScrollY = 0;
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let rafId = null;
+
+      function updateBackgroundImage() {
+        if (!heroBg) return;
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          heroBg.style.backgroundImage = "url('/wave.jpg')";
+        } else {
+          heroBg.style.backgroundImage = "url('/wave_light_mode.jpg')";
+        }
+      }
+
+      function init() {
+        heroBg = document.querySelector('.hero-background-image');
+        heroContainer = document.querySelector('.hero-background-container');
+        heroSection = document.querySelector('section[class*="relative"]');
+        
+        if (!heroBg || !heroContainer) return;
+
+        // Set initial background image based on theme
+        updateBackgroundImage();
+
+        // Watch for theme changes
+        const observer = new MutationObserver(() => {
+          updateBackgroundImage();
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class']
+        });
+
+        // Detect device type (mobile/tablet vs desktop)
+        function detectDeviceType() {
+          const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          const isSmallScreen = window.innerWidth <= 768;
+          const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+          
+          isMobile = isTouchDevice || isSmallScreen || !hasFinePointer;
+          return isMobile;
+        }
+
+        // Handle window resize
+        function handleResize() {
+          detectDeviceType();
+          if (isMobile) {
+            heroContainer.style.position = 'absolute';
+            heroBg.style.backgroundAttachment = 'scroll';
+            heroBg.style.willChange = 'auto';
+          } else {
+            heroContainer.style.position = 'fixed';
+            heroBg.style.backgroundAttachment = 'fixed';
+            heroBg.style.willChange = 'transform, background-position';
+          }
+        }
+        window.addEventListener('resize', handleResize, { passive: true });
+        detectDeviceType();
+        handleResize();
+
+        // Highly sensitive mouse parallax effect - responds to slightest movement
+        const hasMouse = window.matchMedia('(pointer: fine)').matches;
+        const isTouchOnly = window.matchMedia('(pointer: coarse)').matches && !hasMouse;
+        
+        if (!isMobile && hasMouse && !isTouchOnly) {
+          document.addEventListener('mousemove', (e) => {
+            // Calculate mouse position relative to center
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            
+            // Highly sensitive: even small movements create visible effect
+            // Increased multiplier for more responsive movement
+            mouseX = (deltaX / centerX) * 40;
+            mouseY = (deltaY / centerY) * 40;
+          }, { passive: true });
+
+          // Return to center smoothly when mouse leaves
+          document.addEventListener('mouseleave', () => {
+            mouseX = 0;
+            mouseY = 0;
+          }, { passive: true });
+        }
+
+        // Enhanced smooth mouse parallax animation with dynamic effects
+        function animateMouseParallax() {
+          if (isMobile || !heroBg) {
+            rafId = requestAnimationFrame(animateMouseParallax);
+            return;
+          }
+
+          // Very fast, immediate response - no lag
+          currentX += (mouseX - currentX) * 0.25;
+          currentY += (mouseY - currentY) * 0.25;
+          
+          const scrollY = window.scrollY;
+          const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+          
+          // Only apply parallax when in viewport
+          if (scrollY < heroHeight) {
+            // Scroll parallax: background moves slower than content
+            const scrollParallax = scrollY * 0.4;
+            
+            // Calculate dynamic scale based on mouse distance from center
+            const mouseDistance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+            const dynamicScale = 1.15 + (mouseDistance / 80) * 0.06; // More responsive scale
+            
+            // Add rotation based on mouse X position for depth
+            const rotation = mouseX * 0.04;
+            
+            // Combine mouse, scroll parallax, rotation, and dynamic scale
+            heroBg.style.transform = `translate(${currentX}px, ${currentY + scrollParallax}px) rotate(${rotation}deg) scale(${dynamicScale})`;
+            
+            // More sensitive background position shift - responds to slightest movement
+            const bgX = (currentX / 40) * 3;
+            const bgY = (currentY / 40) * 3;
+            heroBg.style.backgroundPosition = `calc(50% + ${bgX}%) calc(50% + ${bgY}%)`;
+          }
+          
+          rafId = requestAnimationFrame(animateMouseParallax);
+        }
+        animateMouseParallax();
+
+        // Scroll parallax effect
+        function updateParallax() {
+          if (!heroBg || !heroSection) return;
+
+          const scrollY = window.scrollY;
+          const heroHeight = heroSection.offsetHeight;
+          const windowHeight = window.innerHeight;
+          
+          // Only apply parallax when hero section is in view
+          if (scrollY < heroHeight + windowHeight) {
+            if (isMobile) {
+              // Mobile: very subtle scroll parallax only (battery-friendly)
+              const parallaxOffset = scrollY * 0.2;
+              heroBg.style.transform = `translateY(${parallaxOffset}px)`;
+            } else {
+              // Desktop: mouse parallax is handled in animateMouseParallax
+              // Scroll parallax is combined there
+            }
+          }
+          
+          ticking = false;
+        }
+
+        function handleScroll() {
+          if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Initial call
+        updateParallax();
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+      });
+    })();
+  </script>
+
+  <!-- Services Section *************** -->
 
   <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
+    id="services"
+    tagline="Our Services"
+    title="Comprehensive Tutoring Solutions"
+    subtitle="From core subjects to specialized exam preparation, we offer personalized support to help every student succeed."
+    columns={2}
     items={[
       {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
+        title: 'School Tutoring',
         description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
+          'Expert support in Math, Physics, and Chemistry. Our tutors work with students to build strong foundations and improve grades through personalized learning plans.',
+        icon: 'tabler:school',
       },
       {
-        title: 'Features',
+        title: 'Exam Preparation',
         description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
+          'Comprehensive preparation for SAT and official exams. We provide targeted strategies, practice tests, and confidence-building sessions to maximize your performance.',
+        icon: 'tabler:certificate',
       },
       {
-        title: 'Content',
+        title: 'Coding & Technology',
         description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
+          'Learn Python and programming basics from experienced instructors. Perfect for students interested in technology and computer science careers.',
+        icon: 'tabler:code',
       },
       {
-        title: 'Call-to-Action',
+        title: 'Languages',
         description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
+          'English language support for students at all levels. Improve your communication skills, grammar, and vocabulary with our expert language tutors.',
+        icon: 'tabler:language',
       },
     ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
   />
 
-  <!-- FAQs Widget ******************* -->
+  <!-- Why B-Smart Section ************ -->
 
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
+  <Features
+    id="why-bsmart"
+    tagline="Why B-Smart"
+    title="What Makes Us Different"
+    subtitle="We're committed to providing exceptional educational support that adapts to each student's unique learning style and goals."
     items={[
       {
-        title: 'Why AstroWind?',
+        title: 'Experienced Tutors',
         description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+          'Our team consists of qualified educators with years of experience in their respective subjects. They understand how to make complex topics accessible and engaging.',
+        icon: 'tabler:user-star',
       },
       {
-        title: 'What do I need to start?',
+        title: 'Personalized Learning Plans',
         description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+          'Every student receives a customized learning plan tailored to their strengths, weaknesses, and academic goals. No one-size-fits-all approach here.',
+        icon: 'tabler:target',
       },
       {
-        title: 'How to install the Astro + Tailwind CSS template?',
+        title: 'Small Groups & 1-on-1 Sessions',
         description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
+          'Choose from intimate small group sessions for collaborative learning or one-on-one tutoring for focused, individualized attention.',
+        icon: 'tabler:users-group',
       },
       {
-        title: "What's something that you don't understand?",
+        title: 'Proven Student Improvement',
         description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+          'Our methods have helped hundreds of students improve their grades, build confidence, and achieve their academic goals. Results speak for themselves.',
+        icon: 'tabler:chart-line',
       },
     ]}
   />
@@ -367,10 +684,47 @@ const metadata = {
 
   <Stats
     stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
+      { title: 'Students Taught', amount: '500+' },
+      { title: 'Years of Experience', amount: '10+' },
+      { title: 'Success Rate', amount: '95%' },
+      { title: 'Subjects Offered', amount: '12+' },
+    ]}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="What Parents and Students Say"
+    subtitle="Don't just take our word for it. Here's what families are saying about their experience with B-Smart."
+    tagline="Testimonials"
+    testimonials={[
+      {
+        testimonial: `My daughter struggled with Math for years. After just a few months with B-Smart, her confidence and grades improved dramatically. The personalized approach made all the difference.`,
+        name: 'Sarah M.',
+        job: 'Parent',
+        image: {
+          src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Sarah M. Image',
+        },
+      },
+      {
+        testimonial: `The SAT preparation program at B-Smart was exactly what I needed. The tutors were patient, knowledgeable, and helped me improve my score by over 200 points. Highly recommend!`,
+        name: 'Ahmed K.',
+        job: 'High School Student',
+        image: {
+          src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Ahmed K. Image',
+        },
+      },
+      {
+        testimonial: `My son was falling behind in Physics, but B-Smart's tutors helped him catch up and even excel. The small group sessions were perfect for him, and he actually enjoys learning now!`,
+        name: 'Layla H.',
+        job: 'Parent',
+        image: {
+          src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Layla H. Image',
+        },
+      },
     ]}
   />
 
@@ -380,20 +734,28 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
+        text: 'Call Us',
+        href: 'tel:+96181501832',
+        icon: 'tabler:phone',
+      },
+      {
+        variant: 'outline',
+        text: 'Contact via WhatsApp',
+        href: 'https://wa.me/96181501832',
         target: '_blank',
-        icon: 'tabler:download',
+        icon: 'tabler:brand-whatsapp',
       },
     ]}
   >
     <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+      Ready to Start Your Learning Journey?
     </Fragment>
 
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      Call us today at +961 81 501 832 and discover how B-Smart can help you or your child achieve academic success.
+      <br class="hidden md:inline" />
+      Contact us via WhatsApp or phone for immediate assistance.
     </Fragment>
   </CallToAction>
 </Layout>
+

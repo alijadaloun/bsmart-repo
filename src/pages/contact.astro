@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Contact',
@@ -12,68 +13,139 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="Contact Us" title="Let's Start Your Learning Journey!" subtitle="Get in touch with B-Smart today. We're here to answer your questions and help you get started." />
+
+  <!-- Contact Form Widget ************* -->
 
   <ContactUs
     id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="Call Us"
+    subtitle="Call us at +961 81 501 832 for immediate assistance, or fill out the form below and we'll get back to you within 24 hours. You can also contact us directly via WhatsApp."
     inputs={[
       {
         type: 'text',
         name: 'name',
         label: 'Name',
+        placeholder: 'Your full name',
       },
       {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
+        type: 'tel',
+        name: 'phone',
+        label: 'Phone Number',
+        placeholder: 'Your phone number',
+      },
+      {
+        type: 'text',
+        name: 'subject',
+        label: 'Subject of Interest',
+        placeholder: 'e.g., Math, Physics, SAT Prep, etc.',
       },
     ]}
     textarea={{
       label: 'Message',
+      placeholder: 'Tell us about your learning goals or any questions you have...',
     }}
     disclaimer={{
       label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+        'By submitting this form, you agree to be contacted by B-Smart regarding your inquiry. We respect your privacy and will never share your information.',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description="Our team typically responds within 24 hours. For faster response, contact us via WhatsApp."
+    button="Send Message"
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Simple Form Handler Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('#form form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const name = formData.get('name') || '';
+          const phone = formData.get('phone') || '';
+          const subject = formData.get('subject') || '';
+          const message = formData.get('message') || '';
+          
+          // Create mailto link with form data
+          const emailBody = `Name: ${name}%0D%0APhone: ${phone}%0D%0ASubject: ${subject}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+          const mailtoLink = `mailto:info@bsmart.com?subject=Contact Form - ${subject}&body=${emailBody}`;
+          
+          // Log to console (for development)
+          console.log('Form submitted:', { name, phone, subject, message });
+          
+          // Open mailto (or you can use fetch to send to an API endpoint)
+          window.location.href = mailtoLink;
+          
+          // Show success message
+          alert('Thank you for contacting B-Smart! Your message has been prepared. Please send it from your email client, or contact us directly via WhatsApp for faster response.');
+        });
+      }
+    });
+  </script>
 
-  <Features2
-    title="We are here to help!"
-    items={[
+  <!-- Quick Contact CTAs *************** -->
+
+  <CallToAction
+    actions={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
+        variant: 'primary',
+        text: 'Contact via WhatsApp',
+        href: 'https://wa.me/96181501832',
+        target: '_blank',
+        icon: 'tabler:brand-whatsapp',
       },
       {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
+        variant: 'outline',
+        text: 'Call Us',
+        href: 'tel:+96181501832',
+        icon: 'tabler:phone',
       },
     ]}
-  />
+  >
+    <Fragment slot="title">
+      Prefer to Talk Directly?
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Reach out to us via WhatsApp or phone for immediate assistance. We're here to help!
+    </Fragment>
+  </CallToAction>
+
+  <!-- Features2 Widget ************** -->
+<Features2
+  title="Ways to Reach Us"
+  subtitle="Choose the contact method that works best for you. We're available to answer your questions and help you get started."
+  items={[
+    {
+      title: "WhatsApp",
+      description: "Send us a message on WhatsApp for quick responses. Perfect for scheduling, questions, or getting started. We typically respond within a few hours.",
+      icon: "tabler:brand-whatsapp",
+    },
+    {
+      title: "Phone",
+      description: "Call us directly to speak with our team. We can answer your questions, discuss your needs, and help you schedule a free assessment.",
+      icon: "tabler:phone",
+    },
+    {
+      title: "Email",
+      description: "Send us an email with detailed questions or information. We'll respond within 24 hours with comprehensive answers.",
+      icon: "tabler:mail",
+    },
+    {
+      title: "Visit Us",
+      description: "Come visit our learning center to see our facilities and meet our team. We welcome walk-ins, but appointments are recommended.",
+      icon: "tabler:map-pin",
+    },
+    {
+      title: "Free Assessment",
+      description: "Book a free assessment to discuss your child's learning needs. We'll evaluate their current level and recommend the best approach.",
+      icon: "tabler:calendar",
+    },
+    {
+      title: "General Inquiries",
+      description: "Have questions about our services, pricing, or teaching methods? We're happy to provide all the information you need to make an informed decision.",
+      icon: "tabler:help",
+    },
+  ]}
+/>
 </Layout>
