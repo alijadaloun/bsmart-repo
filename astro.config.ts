@@ -15,6 +15,8 @@ import astrowind from './vendor/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
+import netlify from '@astrojs/netlify';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const hasExternalScripts = false;
@@ -22,8 +24,8 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  output: 'static',
-
+  site: 'https://alijadaloun.github.io',
+  base: '/bsmart-repo/',
   devToolbar: {
     enabled: false,
   },
@@ -104,4 +106,6 @@ export default defineConfig({
       devSourcemap: false, // Disable sourcemaps in dev for faster builds
     },
   },
+
+  adapter: netlify(),
 });
