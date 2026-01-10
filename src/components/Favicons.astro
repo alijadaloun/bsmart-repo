@@ -1,7 +1,8 @@
 ---
 // Using LOGO.svg for favicon and LOGO.png for Apple touch icon
-const logoSvgPath = '/LOGO.svg';
-const logoPngPath = '/LOGO.png';
+const baseUrl = import.meta.env.BASE_URL;
+const logoSvgPath = `${baseUrl}LOGO.svg`;
+const logoPngPath = `${baseUrl}LOGO.png`;
 ---
 
 <!-- Standard favicon (SVG) -->
