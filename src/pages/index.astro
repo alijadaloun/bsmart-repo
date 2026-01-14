@@ -10,6 +10,8 @@ import MapEmbed from '~/components/widgets/MapEmbed.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const metadata = {
   title: 'B-Smart Learning Center',
   ignoreTitleTemplate: true,
@@ -117,18 +119,26 @@ const metadata = {
       left: -30%;
       width: 140%;
       height: 140%;
-      background-image: url('/wave_light_mode.webp');
+      background-image: url('{baseUrl}wave_light_mode.webp');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-attachment: scroll;
       transform-origin: center center;
       filter: brightness(1) contrast(1.05) saturate(1.1);
-      transition: filter 0.5s ease-in-out, background-image 0.5s ease-in-out;
+      transition: filter 0.5s ease-in-out, background-image 0.5s ease-in-out, opacity 300ms ease;
       /* Faster, more dynamic animations */
       animation: bgFloat 12s ease-in-out infinite, bgWave 15s ease-in-out infinite;
       /* Use will-change only when animations are active */
       will-change: transform, background-position;
+    }
+
+    /* Hide hero background until the image is preloaded (prevents progressive chunked paint) */
+    html.js .hero-background-image {
+      opacity: 0;
+    }
+    html.js .hero-background-image.bg-ready {
+      opacity: 1;
     }
 
     /* Horizontal drift animation - faster and more dynamic */
@@ -167,7 +177,7 @@ const metadata = {
     /* Dark mode uses different image */
     html.dark .hero-background-image,
     .dark .hero-background-image {
-      background-image: url('/wave.webp') !important;
+      background-image: url('{baseUrl}wave.webp') !important;
       background-position: center 30%;
       filter: brightness(0.7) contrast(1.1) saturate(1.2);
       animation: bgFloatDark 12s ease-in-out infinite, bgWaveDark 15s ease-in-out infinite;
@@ -294,7 +304,7 @@ const metadata = {
       }
       html.dark .hero-background-image,
       .dark .hero-background-image {
-        background-image: url('/wave.webp') !important;
+        background-image: url('{baseUrl}wave.webp') !important;
         filter: brightness(0.8) contrast(1) saturate(1);
         animation: none !important;
       }
@@ -308,7 +318,7 @@ const metadata = {
         left: -30%;
         width: 140%;
         height: 140%;
-        background-attachment: fixed;
+        background-attachment: scroll;
         background-position: center center;
         filter: brightness(1) contrast(1.05) saturate(1.1);
         animation: bgFloat 12s ease-in-out infinite, bgWave 15s ease-in-out infinite;
@@ -756,6 +766,10 @@ background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%) !impo
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
+      const BASE_URL = {JSON.stringify(baseUrl)};
+      const WAVE_DARK_URL = `${BASE_URL}wave.webp`;
+      const WAVE_LIGHT_URL = `${BASE_URL}wave_light_mode.webp`;
+
       let heroBg = null;
       let heroContainer = null;
       let heroSection = null;
@@ -768,13 +782,29 @@ background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%) !impo
       let currentY = 0;
       let rafId = null;
 
-      function updateBackgroundImage() {
+      function preloadImage(url) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(url);
+          img.onerror = reject;
+          img.src = url;
+        });
+      }
+
+      async function updateBackgroundImage() {
         if (!heroBg) return;
         const isDark = document.documentElement.classList.contains('dark');
-        if (isDark) {
-          heroBg.style.backgroundImage = "url('/wave.webp')";
-        } else {
-          heroBg.style.backgroundImage = "url('/wave_light_mode.webp')";
+        const url = isDark ? WAVE_DARK_URL : WAVE_LIGHT_URL;
+
+        // Fade out while loading to avoid progressive "chunked" paint
+        heroBg.classList.remove('bg-ready');
+
+        try {
+          await preloadImage(url);
+          heroBg.style.backgroundImage = `url('${url}')`;
+        } finally {
+          // Ensure we always fade back in (even if preload fails, the CSS var fallback may still work)
+          requestAnimationFrame(() => heroBg && heroBg.classList.add('bg-ready'));
         }
       }
 
@@ -785,7 +815,7 @@ background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%) !impo
         
         if (!heroBg || !heroContainer) return;
 
-        // Set initial background image based on theme
+        // Set initial background image based on theme (preloaded)
         updateBackgroundImage();
 
         // Watch for theme changes
@@ -812,7 +842,8 @@ background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%) !impo
           detectDeviceType();
           // Use fixed positioning for both mobile and desktop for consistency
           heroContainer.style.position = 'fixed';
-          heroBg.style.backgroundAttachment = 'fixed';
+          // Avoid expensive repaints / progressive painting artifacts
+          heroBg.style.backgroundAttachment = 'scroll';
           heroBg.style.willChange = 'transform, background-position';
         }
         window.addEventListener('resize', handleResize, { passive: true });

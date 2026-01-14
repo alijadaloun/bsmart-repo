@@ -1,17 +1,18 @@
 ---
 import { SITE } from 'astrowind:config';
+import { getAsset } from '~/utils/permalinks';
 ---
 
 <a href="/" class="flex items-center">
   <!-- Light mode logo -->
   <img
-    src="/BSMARTLOGO_Light.png"
+    src={getAsset('/BSMARTLOGO_Light.png')}
     alt={`${SITE?.name} Logo`}
     class="h-16 md:h-20 lg:h-24 w-auto dark:hidden"
   />
   <!-- Dark mode logo -->
   <img
-    src="/BSMARTLOGO_Dark.png"
+    src={getAsset('/BSMARTLOGO_Dark.png')}
     alt={`${SITE?.name} Logo`}
     class="h-16 md:h-20 lg:h-24 w-auto hidden dark:block"
   />
