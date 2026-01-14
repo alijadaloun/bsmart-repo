@@ -126,7 +126,8 @@ const metadata = {
       background-attachment: scroll;
       transform-origin: center center;
       filter: brightness(1) contrast(1.05) saturate(1.1);
-      transition: filter 0.5s ease-in-out, background-image 0.5s ease-in-out, opacity 300ms ease;
+      transition: filter 0.5s ease-in-out, opacity 300ms ease;
+      /* Removed background-image from transition since it's set via JS */
       /* Faster, more dynamic animations */
       animation: bgFloat 12s ease-in-out infinite, bgWave 15s ease-in-out infinite;
       /* Use will-change only when animations are active */
